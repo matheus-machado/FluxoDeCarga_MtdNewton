@@ -1,8 +1,16 @@
+
+%Desenvolvido por Matheus Machado e Leticia Diniz
+%https://github.com/matheus-machado/FluxoDeCarga_MtdNewton.git
+
 close all
 clear all
 
 load('dados_linhas_exerc.mat')
 load('Barras_exerc.mat')
+%tabela de dados de barras
+%Barras = [barra, tipo, Pg, Qg, Pc, Qc]
+%tipo: 1 - slack, 2 - PQ, 3 - PV
+%sem dado: 666
 prompt = 'Quantas barras temos no sistema? \n';
 num_barras = input(prompt);
 %valores iniciais
@@ -55,8 +63,7 @@ for barra = 1:4
 end
 conjK = conjK';
 bshunt = bshunt + bshunt';
-%conjK{barra} = conjK{barra}';
-%Y = [(2.6783-28.4590*i) (-0.8928+9.9197*i) 0 (-1.7855+19.8393*i); (-0.8928+9.9197*i) (8.1929-98.2386*i) (-3.7290+49.7203*i) (-3.5711+39.6786*i); 0 (-3.7290+49.7203*i) (3.7290-49.7203*i) 0; (-1.7855+19.8393*i) (-3.5711+39.6786*i) 0 (5.3566-58.8579*i)];
+
 
 G = real(Matriz_Y);
 B = imag(Matriz_Y);
@@ -65,10 +72,7 @@ B = imag(Matriz_Y);
 %Qk = Vk*som(Vm(Gkm*sen(tk - tm) - Bkm*cos(tk - tm))), som em m pertence a K
 
 tolerancia = 1*10^-3;
-%tabela de dados de barras
-%Barras = [barra, tipo, Pg, Qg, Pc, Qc]
-%tipo: 1 - slack, 2 - PQ, 3 - PV
-%sem dado: 666
+
 %Barras = [1 1 666 666 0 0; 2 2 0 0 0 0; 3 3 5.2 666 0.8 0.4; 4 2 0 0 4 1.2];
 [linhas, colunas] = size(Barras);
 
